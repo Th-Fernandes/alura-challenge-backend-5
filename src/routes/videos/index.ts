@@ -42,4 +42,20 @@ router.post("/",
   return res.status(201).json(createVideo)
 })
 
+router.patch("/:id", async (req, res) => {
+  const {id} = req.params;
+  const {newTitle, newDescription, newUrl} = req.body
+
+  const videoWithUpdatedData = await prisma.video.update({
+    where: { id: Number(id) },
+    data: { 
+      title: newTitle,
+      description: newDescription,
+      url: newUrl
+    }
+  })
+
+  return res.json(videoWithUpdatedData)
+})
+
 export default router;
