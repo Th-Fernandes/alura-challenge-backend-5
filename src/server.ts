@@ -1,12 +1,10 @@
 import express from "express";
-import { prisma } from "./lib/prisma";
+import videos from "./routes/videos"
 
 const app = express();
+app.use(express.json());
 
-app.get("/", async (request, response) => {
-  const videos = await prisma.video.findMany()
-  return response.json({videos});
-});
+app.use("/videos", videos )
 
 app.listen(3333, () => {
   console.log("HTTP Server running!");
