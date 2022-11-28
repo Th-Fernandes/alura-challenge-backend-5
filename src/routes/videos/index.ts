@@ -67,4 +67,18 @@ videoValidations.url
   return res.json(videoWithUpdatedData)
 })
 
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await prisma.video.delete({
+      where: { id: Number(id) },
+    })
+  } catch(err) {
+    return res.status(500).json( {message: 'Não foi possível excluir o video'} )
+  }
+
+  return res.json({ message: "video deletado com sucesso!" })
+})
+
 export default router;
