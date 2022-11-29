@@ -20,7 +20,7 @@ router.get("/:id", async (req, res) => {
   })
 
   if(getVideoById === null) return res.status(404).json({message: "Não foi possível encontrar o video solicitado pois ele não existe no banco de dados."})
-  return res.json(getVideoById)
+  return res.status(200).json(getVideoById)
 })
 
 router.post("/",
@@ -78,7 +78,7 @@ router.delete("/:id", async (req, res) => {
     return res.status(500).json( {message: 'Não foi possível excluir o video'} )
   }
 
-  return res.json({ message: "video deletado com sucesso!" })
+  return res.status(200).json({ message: "video deletado com sucesso!" })
 })
 
 export default router;
