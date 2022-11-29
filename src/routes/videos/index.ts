@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/", async(req, res) => {
   const videos = await prisma.video.findMany();
-  return res.json(videos);
+  return res.status(200).json(videos);
 });
 
 router.get("/:id", async (req, res) => {
