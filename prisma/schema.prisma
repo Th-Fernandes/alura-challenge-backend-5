@@ -5,6 +5,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
@@ -15,10 +19,14 @@ model video {
   title       String
   description String
   url         String
+
+  category   category? @relation(fields: [categoryId], references: [id])
+  categoryId Int?      @default(1)
 }
 
 model category {
-  id    Int    @id @default(autoincrement())
+  id    Int     @id @default(autoincrement())
   title String
   color String
+  video video[]
 }
