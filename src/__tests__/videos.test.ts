@@ -36,10 +36,10 @@ describe("POST /videos", () => {
   })
 })
 
-describe("DELETE /videos/:id", () => {
-  test("should delete a video by id", async () => {
-    const res = await request(app).delete("/videos/6")
+// describe("DELETE /videos/:id", () => {
+//   test("should delete a video by id", async () => {
+//     const res = await request(app).delete("/videos/6")
 
-    expect(res.statusCode).toBe(200)
-  })
-})
+//     expect(res.statusCode).toBe(200)
+//   })
+// })
