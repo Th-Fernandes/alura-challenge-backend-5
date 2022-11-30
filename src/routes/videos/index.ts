@@ -7,6 +7,20 @@ const router = express.Router();
 
 router.get("/", async(req, res) => {
   const videos = await prisma.video.findMany();
+  const {search} = req.query
+
+  if (search) {
+    const videoByTitle = await prisma.video.findMany({
+      where: {
+        title: {
+          contains: search as string
+        }
+      }
+    })
+    
+    return res.status(200).json(videoByTitle)
+  }
+
   return res.status(200).json(videos);
 });
 
