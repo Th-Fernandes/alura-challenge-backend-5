@@ -33,7 +33,7 @@ router.get("/", verifyJWT ,async(req, res) => {
   return res.status(200).json(videos);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id",verifyJWT , async (req, res) => {
   const {id} = req.params;
 
   const getVideoById = await prisma.video.findUnique({
@@ -47,9 +47,10 @@ router.get("/:id", async (req, res) => {
 })
 
 router.post("/",
- videoValidations.title,
- videoValidations.description,
- videoValidations.url
+  verifyJWT,
+  videoValidations.title,
+  videoValidations.description,
+  videoValidations.url
 , async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -66,9 +67,10 @@ router.post("/",
 })
 
 router.patch("/:id",
-videoValidations.title,
-videoValidations.description,
-videoValidations.url
+  verifyJWT,
+  videoValidations.title,
+  videoValidations.description,
+  videoValidations.url
 , async (req:Request, res:Response) => {
   const { id } = req.params;
   const { title, description, url } = req.body;
@@ -90,7 +92,7 @@ videoValidations.url
   return res.json(videoWithUpdatedData)
 })
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", verifyJWT ,async (req, res) => {
   const { id } = req.params;
 
   try {
