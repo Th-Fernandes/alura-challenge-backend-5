@@ -5,6 +5,9 @@ import categories from "./routes/categories";
 import signIn from "./routes/signIn"
 import signUp from "./routes/signUp"
 
+import dotenv from "dotenv-safe"
+dotenv.config();
+
 const app = express();
 app.use(express.json());
 
