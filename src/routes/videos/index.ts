@@ -33,6 +33,15 @@ router.get("/", verifyJWT ,async(req, res) => {
   return res.status(200).json(videos);
 });
 
+router.get("/free", async (req, res) => {
+  const videos = await prisma.video.findMany({ take: 5 });
+
+  return res.status(200).json({
+    message: 'realize o login para liberar o acesso a todos os videos',
+    videos
+  })
+})
+
 router.get("/:id",verifyJWT , async (req, res) => {
   const {id} = req.params;
 
