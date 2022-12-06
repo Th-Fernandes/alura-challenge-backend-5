@@ -2,10 +2,11 @@ import express, { Request, Response } from "express";
 import { prisma } from "../../lib/prisma";
 import { videoValidations } from "./validation";
 import { validationResult } from 'express-validator';
+import { verifyJWT } from "../../lib/verifyJWT";
 
 const router = express.Router();
 
-router.get("/", async(req, res) => {
+router.get("/", verifyJWT ,async(req, res) => {
   const {search, page} = req.query
 
   if (search) {

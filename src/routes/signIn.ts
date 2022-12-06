@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import { prisma } from "../lib/prisma";
 import jwt from "jsonwebtoken"
-import { user } from "@prisma/client";
 
 const router = express.Router();
 
@@ -20,13 +19,12 @@ router.post("/", async (req:Request, res:Response) => {
       })
 
       return res.json({token, ...userVerify})
-    }
-    else {
+    } else {
       res.status(400).json({message: "não foi possível validar o usuário."})
     }
   }
   catch(error) {
-    return res.json(error)
+    return res.status(400).json(error)
   }
 })
 
