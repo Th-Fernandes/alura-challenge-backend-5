@@ -6,8 +6,7 @@ import { validationResult } from 'express-validator';
 const router = express.Router();
 
 router.get("/", async(req, res) => {
-  const videos = await prisma.video.findMany();
-  const {search} = req.query
+  const {search, page} = req.query
 
   if (search) {
     const videoByTitle = await prisma.video.findMany({
@@ -17,10 +16,19 @@ router.get("/", async(req, res) => {
         }
       }
     })
-    
-    return res.status(200).json(videoByTitle)
+    return res.status(200).json(videoByTitle)  
   }
 
+  if(page) {
+    const videosPaginated = await prisma.video.findMany({
+      skip: 5 * Number(page),
+      take: 5
+    })
+    
+    return res.status(200).json(videosPaginated);
+  }
+
+  const videos = await prisma.video.findMany();
   return res.status(200).json(videos);
 });
 

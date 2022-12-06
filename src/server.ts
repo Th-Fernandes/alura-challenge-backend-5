@@ -8,4 +8,4 @@ app.use(express.json());
 app.use("/videos", videos);
 app.use("/categories/", categories);
 
-export default app;
+export default app; 

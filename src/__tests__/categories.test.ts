@@ -16,6 +16,5 @@ describe("GET /categories by id", () => {
 
     expect(res.statusCode).toBe(200)
     expect(res.body).toStrictEqual({ id: 1, title: 'livre', color: '#F0EDEE' })
-    console.log(res.body)
   })
 })
