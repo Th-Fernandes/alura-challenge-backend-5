@@ -33,6 +33,6 @@ model category {
 
 model user {
   id       String @id @default(uuid())
-  username String
+  username String @unique
   password String
 }
